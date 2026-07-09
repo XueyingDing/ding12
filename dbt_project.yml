@@ -1,0 +1,37 @@
+name: 'ding12'
+version: '1.0.0'
+config-version: 2
+
+# This profile is defined in ~/.dbt/profiles.yml (see profiles.example.yml)
+profile: 'ding12'
+
+# Paths dbt should look in
+model-paths: ["models"]
+seed-paths: ["seeds"]
+analysis-paths: ["analyses"]
+macro-paths: ["macros"]
+test-paths: ["tests"]
+snapshot-paths: ["snapshots"]
+
+target-path: "target"
+clean-targets:
+  - "target"
+  - "dbt_packages"
+
+# Materialization strategy:
+#   staging      -> views  (thin, cheap, standardized reads of raw seeds)
+#   intermediate -> views  (reusable business logic, not queried directly)
+#   marts        -> tables (dashboard-ready, materialized for fast BI reads)
+models:
+  ding12:
+    staging:
+      +materialized: view
+    intermediate:
+      +materialized: view
+    marts:
+      +materialized: table
+
+# Seeds load the manually downloaded Olist CSVs into DuckDB.
+seeds:
+  ding12:
+    +quote_columns: false
