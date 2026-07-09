@@ -1,0 +1,14 @@
+# Copy this file to ~/.dbt/profiles.yml for local development:
+#
+#   mkdir -p ~/.dbt
+#   cp profiles.example.yml ~/.dbt/profiles.yml
+#
+# The `path` is relative to the project root, so the DuckDB database file
+# (ding12.duckdb) is created inside the repo and ignored by .gitignore.
+ding12:
+  target: dev
+  outputs:
+    dev:
+      type: duckdb
+      path: ding12.duckdb
+      threads: 4
