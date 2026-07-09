@@ -1,0 +1,29 @@
+# Python
+.venv/
+venv/
+__pycache__/
+*.pyc
+
+# macOS
+.DS_Store
+
+# dbt artifacts
+target/
+dbt_packages/
+logs/
+
+# DuckDB local database files
+*.duckdb
+*.duckdb.wal
+
+# Secrets & credentials
+.env
+kaggle.json
+
+# Downloaded archives
+*.zip
+
+# Geolocation seed is not modeled in the MVP and is large (~58 MB); keep it
+# locally if downloaded, but don't track it. The other 8 seeds ARE committed
+# so the project can be cloned and built without re-downloading from Kaggle.
+seeds/olist_geolocation_dataset.csv
