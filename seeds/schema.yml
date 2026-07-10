@@ -1,0 +1,47 @@
+version: 2
+
+# These seeds are the raw Olist CSV files, loaded as-is into DuckDB.
+# Cleaning, casting, and renaming happen in the staging layer, not here.
+seeds:
+  - name: olist_customers_dataset
+    description: >
+      One row per customer_id (an order-scoped customer key). customer_unique_id
+      identifies the real person across orders. Includes city/state for geography.
+
+  - name: olist_orders_dataset
+    description: >
+      One row per order. Holds order_status and the purchase / approval /
+      delivery / estimated-delivery timestamps used for delivery reliability.
+
+  - name: olist_order_items_dataset
+    description: >
+      One row per item within an order (order_id + order_item_id). Carries the
+      seller, product, price, and freight_value. This is the revenue grain.
+
+  - name: olist_order_payments_dataset
+    description: >
+      Payment records per order. An order can have multiple payment rows, so
+      order_id is NOT unique here. Holds payment_type, installments, and value.
+
+  - name: olist_order_reviews_dataset
+    description: >
+      Customer review records. Includes review_score (1-5). Some orders have
+      more than one review and some review_ids repeat, so neither column is unique.
+
+  - name: olist_products_dataset
+    description: >
+      One row per product. Includes product_category_name (Portuguese) plus
+      physical dimensions. Category is translated to English via a lookup seed.
+
+  - name: olist_sellers_dataset
+    description: One row per seller_id, with the seller's city and state.
+
+  - name: product_category_name_translation
+    description: >
+      Lookup mapping product_category_name (Portuguese) to
+      product_category_name_english for reporting.
+
+  - name: olist_geolocation_dataset
+    description: >
+      Zip-code-prefix level lat/long reference data. Present for completeness but
+      intentionally NOT modeled in the MVP to keep scope controlled.
