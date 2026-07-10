@@ -1,0 +1,111 @@
+models:
+  - name: stg_customers
+    columns:
+      - name: customer_id
+        data_tests:
+          - not_null
+          - unique
+
+  - name: stg_orders
+    columns:
+      - name: order_id
+        data_tests:
+          - not_null
+          - unique
+      - name: customer_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_customers')
+                field: customer_id
+      - name: order_purchase_at
+        data_tests:
+          - not_null
+
+  - name: stg_order_items
+    columns:
+      - name: order_id
+        description: FK to stg_orders.
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_orders')
+                field: order_id
+      - name: seller_id
+        description: FK to stg_sellers.
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_sellers')
+                field: seller_id
+      - name: product_id
+        description: FK to stg_products
+        data_tests:
+          - relationships:
+              arguments:
+                to: ref('stg_products')
+                field: product_id
+      - name: price
+        data_tests: 
+          - not_null
+
+  - name: stg_order_payments
+    columns:
+      - name: order_id
+        description: FK to stg_orders.
+        data_tests:
+          - not_null
+          - relationships: 
+              arguments:
+                to: ref('stg_orders')
+                field: order_id
+      - name: payment_type
+        data_tests:
+          - accepted_values:
+              arguments:
+                values:
+                  - credit_card
+                  - boleto
+                  - voucher
+                  - debit_card
+                  - not_defined
+  
+  - name: stg_order_reviews
+    columns:
+      - name: order_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_orders')
+                field: order_id
+      - name: review_order
+        data_tests:
+          - accepted_values:
+            arguments:
+              values: [1,2,3,4,5]
+
+  - name: stg_products
+    columns: 
+      - name: product_id
+        description: PK of product table.
+        data_tests:
+          - unique
+          - not_null
+
+  - name: stg_sellers
+    columns:
+      - name: seller_id
+        data_tests:
+          - unique
+          - not_null
+
+  - name: stg_product_category_name_translation
+    columns:
+      - name: product_category_name
+        data_tests:
+          - unique
+          - not_null
