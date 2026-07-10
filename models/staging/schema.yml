@@ -82,11 +82,11 @@ models:
               arguments:
                 to: ref('stg_orders')
                 field: order_id
-      - name: review_order
+      - name: review_score
         data_tests:
           - accepted_values:
-            arguments:
-              values: [1,2,3,4,5]
+              arguments:
+                values: [1,2,3,4,5]
 
   - name: stg_products
     columns: 
