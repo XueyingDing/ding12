@@ -11,4 +11,3 @@ select
     cast(price as double) as price,
     cast(freight_value as double) as freight_value
 from source
-    

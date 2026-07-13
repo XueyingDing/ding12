@@ -1,0 +1,21 @@
+models:
+  - name: int_orders_enriched
+    description: one row per order_id.
+    columns: 
+      - name: order_id
+        data_tests: [unique, not_null]
+
+  - name: int_order_delivery_performance
+    description: one row per order_id.
+    columns:
+      - name: order_id
+        data_tests: [unique, not_null]
+
+  - name: int_seller_order_performance
+    description: one row per order_id + order_item_id.
+
+  - name: int_review_experience
+    description: reviews + delivery, for CX analysis.
+    
+  - name: int_category_performance
+    description: one row per order_id + order_item_id.

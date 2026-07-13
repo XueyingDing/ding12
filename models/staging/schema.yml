@@ -19,7 +19,7 @@ models:
               arguments:
                 to: ref('stg_customers')
                 field: customer_id
-      - name: order_purchase_at
+      - name: order_purchased_at
         data_tests:
           - not_null
 
