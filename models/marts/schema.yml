@@ -1,0 +1,38 @@
+model:
+  - name: mart_daily_marketplace_metrics
+    columns:
+      - name: order_date
+        data_tests: [unique, not_null]
+      - name: gross_orders
+        data_tests: not_null
+  
+  - name: mart_seller_performance
+    columns:
+      - name: seller_id
+        data_tests: [unique, not_null]
+      - name: seller_gmv
+        data_tests: [not_null]
+
+  - name: mart_delivery_reliability
+    columns:
+      - name: order_month
+        data_tests: [unique, not_null]
+      - name: delivered_orders
+        data_tests: [not_null]
+
+  - name: mart_customer_experience
+    columns:
+      - name: order_month
+        data_tests: [unique, not_null]
+
+  - name: mart_category_performance
+    columns:
+      - name: product_category_name_english
+        data_tests: [unique, not_null]
+
+  - name: mart_payment_behavior
+    columns:
+      - name: payment_type
+        data_tests: [unique, not_null]
+      - name: total_payment_value
+        data_tests: [not_null]
